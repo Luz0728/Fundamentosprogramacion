@@ -1,0 +1,93 @@
+#include <iostream>
+#include <cmath>
+#define MAX 100
+using namespace std;
+void sumarImpares(int limite);
+void distanciaPuntos(int a1, int b1, int a2, int b2);
+void procesarNotas(int notas[], int cantidad);
+
+int main() {
+    int arreglo[MAX], cant, px1, py1, px2, py2, opt;
+
+    do {
+        cout << "\n--- MENU PRINCIPAL ---\n";
+        cout << "1. Suma de los primeros N impares\n";
+        cout << "2. Distancia entre dos puntos\n";
+        cout << "3. Registro de notas\n";
+        cout << "0. Terminar\n";
+        cout << "Seleccione opcion: ";
+        cin >> opt;
+
+        switch (opt) {
+        case 1:
+            cout << "Ingrese un numero entero: ";
+            cin >> cant;
+            sumarImpares(cant);
+            break;
+
+        case 2:
+            cout << "Punto 1 (x y): ";
+            cin >> px1 >> py1;
+            cout << "Punto 2 (x y): ";
+            cin >> px2 >> py2;
+            distanciaPuntos(px1, py1, px2, py2);
+            break;
+
+        case 3:
+            cout << "Cantidad de estudiantes: ";
+            cin >> cant;
+            procesarNotas(arreglo, cant);
+            break;
+
+        case 0:
+            cout << "Programa finalizado...\n";
+            break;
+
+        default:
+            cout << "Opcion invalida, intente nuevamente.\n";
+        }
+
+    } while (opt != 0);
+
+    return 0;
+}
+
+void sumarImpares(int limite) {
+    int suma = 0;
+    int actual = 1;
+
+    for (int i = 0; i < limite; i++) {
+        suma += actual;
+        actual += 2;
+    }
+
+    cout << "La suma de los primeros " << limite 
+         << " numeros impares es: " << suma << endl;
+}
+
+void distanciaPuntos(int a1, int b1, int a2, int b2) {
+    double d = sqrt(pow(a2 - a1, 2) + pow(b2 - b1, 2));
+    cout << "Distancia calculada: " << d << endl;
+}
+
+void procesarNotas(int notas[], int cantidad) {
+    float total = 0;
+    float mayor, menor;
+
+    for (int i = 0; i < cantidad; i++) {
+        cout << "Ingrese nota #" << i + 1 << ": ";
+        cin >> notas[i];
+    }
+
+    mayor = menor = notas[0];
+
+    for (int i = 0; i < cantidad; i++) {
+        total += notas[i];
+
+        if (notas[i] > mayor) mayor = notas[i];
+        if (notas[i] < menor) menor = notas[i];
+    }
+    cout << "\nPromedio: " << total / cantidad << endl;
+    cout << "Nota maxima: " << mayor << endl;
+    cout << "Nota minima: " << menor << endl;
+}
